@@ -1,0 +1,16 @@
+{
+  "name": "BasKhao Complete App",
+  "id": "999999999",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "networkAccess": {
+    "allowedDomains": [
+      "https://images.unsplash.com",
+      "https://randomuser.me",
+      "https://fonts.googleapis.com",
+      "https://fonts.gstatic.com"
+    ]
+  }
+}

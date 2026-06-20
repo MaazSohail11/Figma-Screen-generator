@@ -1,0 +1,8 @@
+{
+  "name": "BasKhao Complete App",
+  "id": "999999999",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"]
+}

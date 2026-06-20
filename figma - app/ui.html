@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Inter', -apple-system, sans-serif; 
+      padding: 25px; 
+      background: linear-gradient(135deg, #2C5F5F 0%, #3D9B9B 100%); 
+      color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    h2 { 
+      font-size: 24px; 
+      font-weight: 700; 
+      margin-bottom: 5px;
+      text-align: center;
+    }
+    p { 
+      font-size: 14px; 
+      opacity: 0.95; 
+      line-height: 1.6;
+      text-align: center;
+    }
+    .highlight {
+      background: rgba(244, 185, 66, 0.2);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+    .highlight strong {
+      color: #F4B942;
+    }
+    button { 
+      width: 100%; 
+      padding: 18px; 
+      background: linear-gradient(135deg, #F4B942 0%, #FF8C42 100%); 
+      color: #2C5F5F; 
+      border: none; 
+      border-radius: 14px; 
+      font-size: 17px; 
+      font-weight: 700; 
+      cursor: pointer; 
+      box-shadow: 0 6px 20px rgba(244, 185, 66, 0.5);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+    button:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 8px 25px rgba(244, 185, 66, 0.7); 
+    }
+    button:active {
+      transform: translateY(-1px);
+    }
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      opacity: 0.7;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🍕 BasKhao Complete App</h2>
+  <p><strong>High-Fidelity Prototype</strong></p>
+  
+  <div class="highlight">
+    <p><strong>✨ 46 Screens</strong> covering all 92 features<br>
+    <strong>🔗 Full Prototyping</strong> between all screens<br>
+    <strong>🎨 Teal/Yellow</strong> theme with images<br>
+    <strong>📱 All buttons</strong> & back navigation working</p>
+  </div>
+  
+  <p style="font-size: 12px; opacity: 0.85;">
+    Includes: Login, Guest Mode, Home, Search, Filters,<br>
+    Cart, Checkout, Tracking, Reviews, Profile, Wallet,<br>
+    Notifications, Support, Offers, and much more!
+  </p>
+  
+  <button id="gen">🚀 Generate Complete App</button>
+  
+  <div class="footer">
+    BasKhao © 2025 • Food Delivery Platform
+  </div>
+  
+  <script>
+    document.getElementById('gen').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'generate' } }, '*');
+    };
+  </script>
+</body>
+</html>
