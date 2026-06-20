@@ -1,54 +1,69 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/Figma-Plugin-FF7262?style=for-the-badge&logo=figma&logoColor=white" alt="Figma Plugin" />
-  <img src="https://img.shields.io/badge/Screens-200+-3D9B9B?style=for-the-badge" alt="200+ Screens" />
+  <img src="https://img.shields.io/badge/Figma-Plugin_API-FF7262?style=for-the-badge&logo=figma&logoColor=white" alt="Figma Plugin" />
+  <img src="https://img.shields.io/badge/Auto_Generated-200+_Screens-3D9B9B?style=for-the-badge" alt="200+ Screens" />
   <img src="https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
-  <img src="https://img.shields.io/badge/Platform-Web%20%2B%20Mobile-F4B942?style=for-the-badge" alt="Platform" />
+  <img src="https://img.shields.io/badge/Platforms-Mobile%20%2B%20Desktop-F4B942?style=for-the-badge" alt="Platforms" />
 </p>
 
-<h1 align="center">🍕 BasKhao — Figma Screen Generator</h1>
+<h1 align="center">⚡ Figma Screen Generator</h1>
 
 <p align="center">
-  <b>A suite of Figma plugins that auto-generate complete, production-ready UI screens for the BasKhao food delivery platform — spanning mobile apps, desktop dashboards, wireframes, landing pages, and admin panels.</b>
+  <b>Generate hundreds of production-ready Figma screens entirely through code.<br/>No manual dragging. No component libraries. Just JavaScript → full UI.</b>
 </p>
 
 <p align="center">
-  <a href="#-architecture-overview">Architecture</a> •
+  <a href="#-what-this-does">What This Does</a> •
+  <a href="#-architecture">Architecture</a> •
   <a href="#-plugin-modules">Modules</a> •
-  <a href="#-screen-catalog">Screens</a> •
   <a href="#-how-it-works">How It Works</a> •
   <a href="#-getting-started">Getting Started</a> •
-  <a href="#-design-system">Design System</a>
+  <a href="#-capabilities">Capabilities</a>
 </p>
 
 ---
 
-## 🏗️ Architecture Overview
+## 🧠 What This Does
+
+This project demonstrates **programmatic UI generation inside Figma** — using the Figma Plugin API to create complete, pixel-perfect screens from pure JavaScript. Instead of manually designing each screen, you write code that:
+
+- 🖼️ **Creates frames, shapes, text, and images** at precise coordinates
+- 🎨 **Applies design tokens** (colors, typography, spacing) consistently
+- 🔗 **Names elements for prototyping** so screens are immediately interactive
+- 📱 **Handles both mobile (375×812) and desktop (1440×900)** layouts
+- 🖼️ **Loads real images from URLs** (Unsplash) with graceful fallbacks
+- 📐 **Auto-positions screens** in organized rows and columns on the canvas
+
+> **Currently optimized for:** Food delivery / restaurant platform screens (customer, merchant, corporate, admin flows). The architecture and helper system is fully reusable for any domain.
+
+---
+
+## 🏗️ Architecture
 
 ```mermaid
 graph TB
-    subgraph "BasKhao Figma Plugin Suite"
+    subgraph "Figma Screen Generator Suite"
         direction TB
         
-        subgraph MOBILE["📱 Mobile Plugins (375×812)"]
-            APP_HF["figma - app - high fid<br/>46+ Hi-Fi Screens<br/>265 KB"]
-            APP_LF["app wireframes<br/>46+ Lo-Fi Wireframes<br/>176 KB"]
-            APP_MID["figma - app<br/>Extended Features<br/>169 KB"]
+        subgraph MOBILE["📱 Mobile Generators (375×812)"]
+            APP_HF["High-Fidelity Generator<br/>46+ screens with real images<br/>265 KB of generation code"]
+            APP_LF["Wireframe Generator<br/>46+ lo-fi wireframes<br/>176 KB"]
+            APP_EXT["Extended Feature Generator<br/>12+ advanced screens<br/>169 KB"]
         end
         
-        subgraph DESKTOP["🖥️ Desktop Plugins (1440×900)"]
-            PC_HF["figma - pc<br/>30+ Hi-Fi Screens<br/>110 KB + Backup"]
-            PC_LF["pc wireframes<br/>64+ Lo-Fi Wireframes<br/>113 KB"]
-            PC_PAGES["pages/<br/>29 HTML Screens<br/>Static Mirrors"]
+        subgraph DESKTOP["🖥️ Desktop Generators (1440×900)"]
+            PC_HF["Dashboard Generator<br/>30+ role-based screens<br/>110 KB"]
+            PC_LF["Desktop Wireframe Generator<br/>64+ wireframe screens<br/>113 KB"]
+            PC_HTML["Static HTML Mirrors<br/>29 browser-viewable pages"]
         end
         
-        subgraph LANDING["🌐 Landing Page"]
-            LAND["figma - app - Copy<br/>Scrollable Landing Page<br/>21 KB"]
+        subgraph LANDING["🌐 Page Generator"]
+            LAND["Landing Page Generator<br/>7-section scrollable page<br/>21 KB"]
         end
     end
     
-    APP_HF -->|"Same naming convention"| APP_LF
-    PC_HF -->|"Same naming convention"| PC_LF
-    PC_HF -->|"HTML mirrors"| PC_PAGES
+    APP_HF -->|"Shared element naming"| APP_LF
+    PC_HF -->|"Shared element naming"| PC_LF
+    PC_HF -->|"Layout mirrored to"| PC_HTML
 
     style MOBILE fill:#2C5F5F,color:#fff,stroke:#F4B942,stroke-width:2px
     style DESKTOP fill:#2C5F5F,color:#fff,stroke:#F4B942,stroke-width:2px
@@ -60,145 +75,127 @@ graph TB
 ## 📂 Project Structure
 
 ```
-working figma/
+├── 📱 figma - app - high fid/     # Hi-Fi Mobile Screen Generator
+│   ├── code.js                     # 6,967 lines — generates 46+ screens with images
+│   ├── ui.html                     # Plugin control panel
+│   └── manifest.json               # Figma plugin config
 │
-├── 📱 figma - app - high fid/     # HIGH-FIDELITY MOBILE APP (Primary)
-│   ├── code.js                     # 6,967 lines — 46+ screens with real images
-│   ├── ui.html                     # Plugin UI panel
-│   ├── manifest.json               # Figma plugin manifest
-│   └── dist/                       # Build output
+├── 📱 figma - app/                 # Extended Feature Generator
+│   ├── code.js                     # 4,665 lines — group orders, split pay, pickup
+│   ├── ui.html
+│   └── manifest.json
 │
-├── 📱 figma - app/                 # EXTENDED MOBILE FEATURES
-│   ├── code.js                     # 4,665 lines — Pickup, Group Orders, Split Pay
-│   ├── ui.html                     # Plugin UI panel
-│   ├── manifest.json               # Figma plugin manifest
-│   └── dist/                       # Build output
+├── 📱 app wireframes/              # Mobile Wireframe Generator
+│   ├── code.js                     # 5,303 lines — lo-fi versions, same element names
+│   ├── ui.html
+│   └── manifest.json
 │
-├── 📱 app wireframes/              # LOW-FIDELITY MOBILE WIREFRAMES
-│   ├── code.js                     # 5,303 lines — Wireframe versions of all screens
-│   ├── ui.html                     # Plugin UI panel
-│   ├── manifest.json               # Figma plugin manifest
-│   └── dist/                       # Build output
-│
-├── 🖥️ figma - pc/                  # HIGH-FIDELITY DESKTOP DASHBOARD
-│   ├── code.js                     # 2,465 lines — Business, Corporate, Merchant, Admin
-│   ├── code - backup.js            # 3,757 lines — Full backup with images
-│   ├── ui.html                     # Plugin UI panel
-│   ├── manifest.json               # With networkAccess for Unsplash images
-│   ├── pages/                      # 29 static HTML screen mirrors
-│   │   ├── index.html              # Hub page linking all screens
+├── 🖥️ figma - pc/                  # Desktop Dashboard Generator
+│   ├── code.js                     # 2,465 lines — business, merchant, admin screens
+│   ├── code - backup.js            # 3,757 lines — full version with live images
+│   ├── manifest.json               # Includes networkAccess for image loading
+│   ├── pages/                      # 29 static HTML mirrors of generated screens
+│   │   ├── index.html              # Hub page linking all screen previews
 │   │   ├── assets/style.css        # Shared CSS design system
-│   │   ├── 101-admin-dashboard.html
-│   │   ├── 120-analytics.html
-│   │   ├── 135-corporate-discounts.html
-│   │   ├── 142-membership.html
-│   │   ├── 156-merchant-dashboard.html
-│   │   └── ... (29 total screens)
-│   └── dist/                       # Build output
+│   │   └── *.html                  # Individual screen pages
+│   └── ui.html
 │
-├── 🖥️ pc wireframes/               # LOW-FIDELITY DESKTOP WIREFRAMES
+├── 🖥️ pc wireframes/               # Desktop Wireframe Generator
 │   ├── code.js                     # 2,979 lines — 64+ wireframe screens
-│   ├── ui.html                     # Plugin UI panel
-│   ├── manifest.json               # With networkAccess
-│   └── dist/                       # Build output
+│   ├── ui.html
+│   └── manifest.json
 │
-├── 🌐 figma - app - Copy/          # LANDING PAGE GENERATOR
-│   ├── code.js                     # 514 lines — Scrollable landing page
-│   ├── ui.html                     # Plugin UI panel
-│   ├── manifest.json               # Figma plugin manifest
-│   └── dist/                       # Build output
+├── 🌐 figma - app - Copy/          # Landing Page Generator
+│   ├── code.js                     # 514 lines — multi-section scrollable page
+│   ├── ui.html
+│   └── manifest.json
 │
 ├── .gitignore
-└── README.md                       # ← You are here
+└── README.md
 ```
 
 ---
 
 ## 🔌 Plugin Modules
 
-### Module 1: 📱 High-Fidelity Mobile App (`figma - app - high fid`)
+### 1. 📱 High-Fidelity Mobile Generator
 
-> **The flagship module** — Generates a complete, production-quality mobile app prototype directly inside Figma.
+> Generates **46+ fully-designed mobile screens** with real Unsplash images, gradient backgrounds, and pixel-perfect layouts — all from a single button click.
 
-| Spec | Detail |
-|------|--------|
+| Capability | Detail |
+|------------|--------|
 | **Viewport** | 375 × 812 (iPhone X) |
-| **Screens** | 46+ fully designed |
-| **Features** | 92 features covered |
-| **Images** | Real Unsplash photos via `figma.createImageAsync()` |
-| **Colors** | Teal/Yellow brand theme with gradients |
-| **Typography** | Inter (Regular, Bold, Semi Bold) |
-| **Prototyping** | All buttons named with `-CLICK` suffix for Figma prototyping |
+| **Image Loading** | Real photos via `figma.createImageAsync()` with fallback |
+| **Typography** | Inter font in 3 weights, auto-loaded |
+| **Interactive Elements** | All buttons/links named with `-CLICK` suffix for Figma prototyping |
+| **Chunked Generation** | Progress notifications (`Chunk 1/9 Complete...`) |
 
-**Screen flow covered:**
+**What it generates:**
 ```
-Splash → Welcome → Login/Signup → OTP → Location → Home → Search →
-Restaurant → Menu → Cart → Checkout → Tracking → Reviews → Profile →
-Wallet → Notifications → Support → Offers → Settings → and more
+Auth screens → Location flow → Home dashboard → Search & filters →
+Item detail → Cart & checkout → Payment → Order tracking →
+Reviews → Profile & settings → Wallet → Notifications → Support
 ```
 
 ---
 
-### Module 2: 📱 Extended Mobile Features (`figma - app`)
+### 2. 📱 Extended Feature Generator
 
-> Adds advanced features that extend the core app — group ordering, split payments, pickup/takeaway flows.
+> Adds **advanced interaction patterns** — multi-user group ordering, split payment workflows, delivery type selection, pickup/takeaway flows.
 
-**Key screens:**
-- 🚗 Pickup/Takeaway Selection & Notifications
-- ⚡ Delivery Type Selection (Standard, Express, Contactless, Curbside)
-- 👥 Group Order (Start, Lobby, Finalize)
-- 💳 Split Payment (Setup, Status tracking)
-
----
-
-### Module 3: 📱 Mobile Wireframes (`app wireframes`)
-
-> Low-fidelity wireframe versions of **every mobile screen**, using the **exact same element names** as the high-fidelity versions.
-
-This enables Figma prototyping links to work identically between wireframe and high-fi screens.
-
-**Wireframe Design Language:**
-- White fills with black borders (buttons)
-- Gray lines as text placeholders
-- Gray boxes with X-cross for image placeholders
-- Same layout coordinates as high-fidelity screens
+**Generated screens include:**
+- Pickup/Takeaway selection with time slots
+- Order-ready notifications with urgency timers
+- Delivery type cards (Standard, Express, Contactless, Curbside)
+- Group order lobby with live participant tracking
+- Split payment setup with per-person breakdowns
+- Payment status tracking with progress bars
 
 ---
 
-### Module 4: 🖥️ Desktop Dashboard (`figma - pc`)
+### 3. 📱 Mobile Wireframe Generator
 
-> Generates enterprise-grade desktop screens (1440×900) organized by **role-based categories**.
+> Creates **lo-fi wireframe versions** of every mobile screen using the **exact same element names** as the hi-fi versions.
+
+**Wireframe design language:**
+- White rectangles with black 2px borders (buttons)
+- Gray horizontal lines as text placeholders
+- Gray boxes with diagonal X-cross (image placeholders)
+- Same x/y coordinates as hi-fi counterparts
+
+> 💡 **Why this matters:** Because element names match (`LoginBtn-CLICK`, `SearchBar-CLICK`, etc.), Figma prototyping links work identically between wireframe and hi-fi versions. You can swap fidelity levels without re-linking anything.
+
+---
+
+### 4. 🖥️ Desktop Dashboard Generator
+
+> Generates **30+ enterprise dashboard screens** (1440×900) organized by user role.
 
 ```mermaid
 graph LR
-    subgraph "Desktop Screen Categories"
+    subgraph "Generated Screen Categories"
         BIZ["💼 Business<br/>3 screens"]
         CORP["🏢 Corporate<br/>6 screens"]
         MERCH["🍽️ Merchant<br/>10 screens"]
         ADMIN["⚙️ Admin<br/>6+ screens"]
-        DONATE["❤️ Donation<br/>4 screens"]
+        DONATE["❤️ Community<br/>4 screens"]
     end
 
-    BIZ --> B1["121 - Registration"]
-    BIZ --> B2["122 - Dashboard"]
-    BIZ --> B3["142 - Membership"]
+    BIZ --> B1["Registration"]
+    BIZ --> B2["Dashboard"]
+    BIZ --> B3["Membership Plans"]
 
-    CORP --> C1["135 - Discounts"]
-    CORP --> C2["136 - Employees"]
-    CORP --> C3["137 - Invoices"]
-    CORP --> C4["138 - Setup"]
-    CORP --> C5["135 Admin - Discounts"]
-    CORP --> C6["139 Admin - Accounts"]
+    CORP --> C1["Discount Manager"]
+    CORP --> C2["Employee Management"]
+    CORP --> C3["Invoice History"]
 
-    MERCH --> M1["120 - Analytics"]
-    MERCH --> M2["149 - Orders"]
-    MERCH --> M3["150 - Menu"]
-    MERCH --> M4["156 - Dashboard"]
+    MERCH --> M1["Analytics Dashboard"]
+    MERCH --> M2["Order Management"]
+    MERCH --> M3["Menu & Staff"]
 
-    ADMIN --> A1["101 - Dashboard"]
-    ADMIN --> A2["102 - Users"]
-    ADMIN --> A3["103 - Approvals"]
-    ADMIN --> A4["104 - Monitoring"]
+    ADMIN --> A1["Admin Dashboard"]
+    ADMIN --> A2["User Management"]
+    ADMIN --> A3["Monitoring & Reports"]
 
     style BIZ fill:#3D9B9B,color:#fff
     style CORP fill:#F4B942,color:#333
@@ -207,92 +204,34 @@ graph LR
     style DONATE fill:#E84C3D,color:#fff
 ```
 
-Plus, this module includes **29 static HTML pages** (`pages/`) that mirror the Figma screens for web previewing.
+Also includes **29 static HTML pages** that mirror the generated Figma screens for browser-based previewing.
 
 ---
 
-### Module 5: 🖥️ Desktop Wireframes (`pc wireframes`)
+### 5. 🖥️ Desktop Wireframe Generator
 
-> **64+ wireframe screens** covering the full web application — the largest module by screen count.
+> The largest module — generates **64 wireframe screens** covering customer, merchant, and admin flows for web.
 
-| Category | Screens |
-|----------|---------|
-| Customer (Web) | 43 screens — Splash through Settings |
-| Restaurant (Merchant) | 11 screens — Dashboard through Staff |
-| Admin | 10 screens — Dashboard through Analytics |
-| **Total** | **64 screens** |
-
----
-
-### Module 6: 🌐 Landing Page (`figma - app - Copy`)
-
-> Generates a scrollable, multi-section landing page with **real Unsplash images**.
-
-**Sections (4800px total height):**
-1. **Hero** (900px) — CTA, feature cards, customer badges
-2. **How It Works** (600px) — 3-step flow cards
-3. **Featured Restaurants** (650px) — Real food photos
-4. **Popular Dishes** (700px) — Category tabs + dish cards
-5. **Delivery Riders** (550px) — USP section
-6. **Customer Reviews** (500px) — Testimonial cards
-7. **Footer** (600px) — Newsletter, links, app badges
+| Flow | Screens |
+|------|---------|
+| Customer (Web) | 43 — Splash through Settings, including deals, rewards, notifications |
+| Merchant | 11 — Dashboard, orders, menu, staff, payouts, reviews, promotions |
+| Admin | 10 — Dashboard, user management, approvals, monitoring, analytics |
 
 ---
 
-## 🎨 Design System
+### 6. 🌐 Landing Page Generator
 
-All plugins share a unified visual language:
+> Generates a **scrollable, multi-section marketing page** (4800px total height) with real Unsplash images.
 
-```mermaid
-graph TB
-    subgraph "Color Palette"
-        TEAL["🟢 Teal<br/>#3D9B9B<br/>Primary"]
-        DTEAL["🟢 Dark Teal<br/>#2C5F5F<br/>Headers"]
-        YELLOW["🟡 Yellow<br/>#F5B842<br/>CTAs & Accents"]
-        RED["🔴 Red<br/>#E84A3D<br/>Errors"]
-        GREEN["🟢 Green<br/>#33B34D<br/>Success"]
-    end
-
-    subgraph "Typography"
-        INTER["Inter Font Family"]
-        REG["Regular — Body text"]
-        SEMI["Semi Bold — Labels"]
-        BOLD["Bold — Headings & CTAs"]
-    end
-
-    subgraph "Component Patterns"
-        BTN["btn() — Rounded buttons"]
-        TXT["txt() — Text elements"]
-        CARD["card() — Content cards"]
-        IMG["img() / imgPlaceholder() — Images"]
-        INPUT["inputField() — Form inputs"]
-        HEADER["header() / topBar() — Navigation"]
-        NAVBAR["navBar() — Bottom/Top navigation"]
-    end
-    
-    style TEAL fill:#3D9B9B,color:#fff
-    style DTEAL fill:#2C5F5F,color:#fff
-    style YELLOW fill:#F5B842,color:#333
-    style RED fill:#E84A3D,color:#fff
-    style GREEN fill:#33B34D,color:#fff
-```
-
-### Shared Helper Functions
-
-Every plugin reuses the same core helper API:
-
-| Function | Purpose | Used In |
-|----------|---------|---------|
-| `btn(parent, name, x, y, w, h, color, text, fontSize)` | Create styled button with text | All modules |
-| `txt(parent, text, x, y, size, color, style)` | Create text element | All modules |
-| `card(parent, x, y, w, h, color)` | Create rounded rectangle card | Desktop modules |
-| `inputField(parent, x, y, w, h, placeholder)` | Create form input with placeholder | Mobile modules |
-| `img(parent, x, y, w, h, url)` | Load real image from URL | Hi-fi modules |
-| `imgPlaceholder(parent, x, y, w, h, query)` | Gray box with label | Desktop modules |
-| `imgWire(parent, x, y, w, h)` | Gray box with X-cross diagonal | Wireframe modules |
-| `btnWire(parent, name, x, y, w, h)` | White button with black border | Wireframe modules |
-| `header()` / `topBar()` / `navBar()` | Navigation bars | All modules |
-| `notificationBar(parent)` | iPhone status bar (9:41, battery, signal) | Mobile modules |
+**Generated sections:**
+1. Hero (900px) — CTA buttons, feature cards, floating food images
+2. How It Works (600px) — 3-step numbered card flow
+3. Featured Items (650px) — Photo cards with ratings
+4. Popular Categories (700px) — Category tabs + item cards
+5. Feature Highlight (550px) — Side-by-side image + benefits list
+6. Testimonials (500px) — Review cards with avatars
+7. Footer (600px) — Newsletter signup, link columns, social icons
 
 ---
 
@@ -301,40 +240,136 @@ Every plugin reuses the same core helper API:
 ```mermaid
 sequenceDiagram
     participant U as 👤 User
-    participant UI as 🖼️ Plugin UI (ui.html)
-    participant JS as ⚙️ Plugin Code (code.js)
+    participant UI as 🖼️ Plugin Panel (ui.html)
+    participant JS as ⚙️ Generator (code.js)
     participant F as 🎨 Figma Canvas
 
-    U->>UI: Click "Generate Complete App"
+    U->>UI: Click "Generate"
     UI->>JS: postMessage({ type: 'generate' })
     JS->>F: Load fonts (Inter Regular/Bold/Semi Bold)
-    JS->>F: Find or create target page ("test" / "App_HF" / "Web_HF")
+    JS->>F: Find or create target page
     
     loop For each screen
-        JS->>F: createFrame() with dimensions
-        JS->>F: Add header, cards, buttons, text
-        JS->>F: Load images via createImageAsync()
-        JS->>F: Name interactive elements with "-CLICK" suffix
-        JS->>F: Position with x += W + G spacing
+        JS->>F: createFrame() — set dimensions & position
+        JS->>F: Build UI — headers, cards, buttons, text, inputs
+        JS->>F: Load images via createImageAsync() or show placeholder
+        JS->>F: Name interactive elements (*-CLICK) for prototyping
+        JS->>F: Advance position (x += W + gap)
     end
     
-    JS->>F: notify("✅ Complete!")
-    JS->>F: scrollAndZoomIntoView(screens)
+    JS->>F: notify("✅ Generation complete!")
+    JS->>F: scrollAndZoomIntoView(allScreens)
 ```
 
-### Plugin Communication Flow
+### Core Architecture Pattern
+
+Every module follows the same pattern:
 
 ```
-┌─────────────────────┐     postMessage      ┌─────────────────────┐
-│                     │    ──────────────►    │                     │
-│      ui.html        │    { type: 'generate' }│      code.js        │
-│   (Plugin Panel)    │                      │   (Figma Sandbox)   │
-│                     │    ◄──────────────    │                     │
-│  • "Generate" button│    figma.notify()     │  • Figma API calls  │
-│  • Teal/Gold theme  │                      │  • Font loading     │
-│  • Feature summary  │                      │  • Screen creation  │
-└─────────────────────┘                      └─────────────────────┘
+┌─────────────────────┐     postMessage       ┌──────────────────────┐
+│     ui.html          │    ──────────────►    │      code.js          │
+│  (Control Panel)     │   { type: 'generate' }│  (Screen Generator)   │
+│                      │                       │                       │
+│  • Generate button   │    ◄──────────────    │  • Font loading       │
+│  • Themed UI panel   │    figma.notify()     │  • Helper functions   │
+│  • Feature summary   │                       │  • Screen definitions │
+└──────────────────────┘                       └──────────────────────┘
 ```
+
+---
+
+## 🧰 Capabilities
+
+### What You Can Generate
+
+| Capability | Implementation |
+|-----------|---------------|
+| **Frames** | `figma.createFrame()` with exact width/height |
+| **Rectangles** | Cards, buttons, inputs, headers, dividers |
+| **Text** | Auto-loaded Inter font, any size/weight/color |
+| **Ellipses** | Avatars, radio buttons, status dots |
+| **Lines** | Dividers, progress connectors, wireframe X-crosses |
+| **Real Images** | `figma.createImageAsync(url)` from Unsplash |
+| **Gradients** | Linear gradient fills on backgrounds |
+| **Rounded Corners** | Per-element `cornerRadius` |
+| **Strokes** | Borders with custom weight, color, dash patterns |
+| **Auto-Positioning** | Grid layout with row/column gap calculations |
+| **Prototyping-Ready** | All interactive elements named with `-CLICK` suffix |
+| **Multi-Page** | Creates/finds target pages automatically |
+| **Chunked Progress** | `figma.notify()` updates during long generations |
+
+### Helper Function Library
+
+The project includes a reusable helper system that abstracts common Figma operations:
+
+```javascript
+// Create a styled button with centered text
+btn(parent, name, x, y, width, height, color, label, fontSize)
+
+// Create a text element with font control
+txt(parent, text, x, y, fontSize, color, fontStyle)
+
+// Create a rounded card/container
+card(parent, x, y, width, height, fillColor)
+
+// Create an input field with placeholder text
+inputField(parent, x, y, width, height, placeholderText)
+
+// Load a real image from URL with fallback
+img(parent, x, y, width, height, imageUrl)
+
+// Create a gray placeholder with label (for hi-fi)
+imgPlaceholder(parent, x, y, width, height, label)
+
+// Wireframe-specific helpers
+btnWire(parent, name, x, y, width, height)    // White + black border
+txtWire(parent, x, y, fontSize)                // Gray placeholder line
+imgWire(parent, x, y, width, height)           // Gray box with X-cross
+inputWire(parent, x, y, width, height)         // Gray input outline
+```
+
+### Screen Positioning System
+
+```javascript
+// Mobile: Horizontal strip
+const W = 375, H = 812, GAP = 100;
+let x = 0;
+// After each screen: x += W + GAP
+
+// Desktop: Grid with rows
+const W = 1440, H = 900, GAP = 150, ROW_GAP = 200;
+let colX = 0, rowY = 0;
+// New column: colX += W + GAP
+// New row:    colX = 0; rowY += H + ROW_GAP
+```
+
+---
+
+## 🔗 Wireframe ↔ Hi-Fi Connection
+
+```mermaid
+graph LR
+    subgraph "Wireframe Layer"
+        WF["Lo-Fi Screens<br/>Black & white<br/>Placeholder graphics"]
+    end
+    
+    subgraph "High-Fidelity Layer"  
+        HF["Hi-Fi Screens<br/>Full color + real images<br/>Production-ready"]
+    end
+    
+    subgraph "HTML Preview Layer"
+        HTML["Static HTML Pages<br/>Browser-viewable<br/>Same layout & data"]
+    end
+
+    WF -->|"Identical element names<br/>Prototyping links transfer"| HF
+    HF -->|"Visual mirror<br/>Same structure"| HTML
+
+    style WF fill:#f0f0f0,color:#333,stroke:#333,stroke-width:2px
+    style HF fill:#3D9B9B,color:#fff,stroke:#F4B942,stroke-width:2px
+    style HTML fill:#2C5F5F,color:#fff,stroke:#F4B942,stroke-width:2px
+```
+
+All interactive elements share **identical names** across wireframe and hi-fi versions (`LoginBtn-CLICK`, `SearchBar-CLICK`, etc.). This means prototyping links built on wireframes **automatically work** when you switch to hi-fi screens.
 
 ---
 
@@ -342,8 +377,8 @@ sequenceDiagram
 
 ### Prerequisites
 
-- [Figma Desktop App](https://www.figma.com/downloads/) (or web browser)
-- A Figma account
+- [Figma Desktop App](https://www.figma.com/downloads/) (or Figma in browser)
+- A Figma account (free tier works)
 
 ### Installation
 
@@ -352,238 +387,66 @@ sequenceDiagram
    git clone https://github.com/MaazSohail11/Figma-Screen-generator.git
    ```
 
-2. **Open Figma** and go to: `Plugins → Development → Import plugin from manifest...`
+2. **Open Figma** → `Plugins` → `Development` → `Import plugin from manifest...`
 
-3. **Select a `manifest.json`** from any module folder:
-   - `figma - app - high fid/manifest.json` for mobile hi-fi screens
-   - `figma - pc/manifest.json` for desktop dashboard screens
-   - `app wireframes/manifest.json` for mobile wireframes
-   - `pc wireframes/manifest.json` for desktop wireframes
-   - `figma - app - Copy/manifest.json` for landing page
-   - `figma - app/manifest.json` for extended mobile features
+3. **Select any `manifest.json`** to load that generator:
 
-4. **Run the plugin** → Click "🚀 Generate Complete App"
+   | Goal | Module to Load |
+   |------|---------------|
+   | Mobile hi-fi screens | `figma - app - high fid/manifest.json` |
+   | Mobile wireframes | `app wireframes/manifest.json` |
+   | Desktop dashboards | `figma - pc/manifest.json` |
+   | Desktop wireframes | `pc wireframes/manifest.json` |
+   | Scrollable landing page | `figma - app - Copy/manifest.json` |
+   | Advanced mobile features | `figma - app/manifest.json` |
 
-5. **Wait for generation** (may take 30-60 seconds for image-heavy modules)
+4. **Run the plugin** → Click the generate button
 
-### Quick Start: Which module to load first?
+5. **Wait for generation** — progress notifications appear as screens are built
 
-| Your Goal | Load This Module |
-|-----------|-----------------|
-| See the complete mobile app | `figma - app - high fid` |
-| Design review with stakeholders | `app wireframes` → then `figma - app - high fid` |
-| Build merchant/admin dashboards | `figma - pc` |
-| Preview screens in browser | Open `figma - pc/pages/index.html` |
-| Generate a marketing landing page | `figma - app - Copy` |
+### Browser Preview (No Figma Needed)
+
+Open `figma - pc/pages/index.html` in any browser to preview the 29 desktop screen layouts as static HTML.
 
 ---
 
-## 🗺️ Complete Screen Map
-
-### Mobile App Screens (46+)
-
-```mermaid
-graph TD
-    subgraph "Auth Flow"
-        S01["01 Splash"] --> S02["02 Welcome"]
-        S02 --> S03["03 Login"]
-        S02 --> S08["08 Guest"]
-        S03 --> S04["04 Signup"]
-        S04 --> S05["05 OTP"]
-        S03 --> S06["06 Forgot Password"]
-        S06 --> S07["07 Reset Password"]
-    end
-
-    subgraph "Core Flow"
-        S09["09 Location Permission"] --> S10["10 Location Selector"]
-        S10 --> S11["11 Home Dashboard"]
-        S11 --> S12["12 Search"]
-        S12 --> S13["13 Search Results"]
-        S11 --> S14["14 Filters"]
-    end
-
-    subgraph "Order Flow"
-        S15["15 Restaurant"] --> S16["16 Menu Item"]
-        S16 --> S17["17 Cart"]
-        S17 --> S18["18 Checkout"]
-        S18 --> S19["19 Payment"]
-        S19 --> S20["20 Confirmation"]
-        S20 --> S21["21 Tracking"]
-    end
-
-    subgraph "User Features"
-        S30["30 Profile"]
-        S31["31 Edit Profile"]
-        S32["32 Addresses"]
-        S33["33 Wallet"]
-        S34["34 Notifications"]
-        S35["35 Support"]
-        S36["36 Reviews"]
-        S37["37 Favorites"]
-        S38["38 Settings"]
-    end
-
-    S02 --> S09
-    S05 --> S09
-    S08 --> S09
-    S11 --> S15
-    S11 --> S30
-
-    style S01 fill:#2C5F5F,color:#fff
-    style S11 fill:#F4B942,color:#333
-    style S17 fill:#F4B942,color:#333
-    style S20 fill:#33B34D,color:#fff
-```
-
-### Desktop Dashboard Screens (30+)
-
-| # | Screen Name | Category | Key Features |
-|---|-------------|----------|--------------|
-| 101 | Admin Dashboard | Admin | Overview, metrics, quick actions |
-| 102 | User Management | Admin | CRUD users, search, roles |
-| 103 | Restaurant Approvals | Admin | Approve/reject applications |
-| 104 | Order Monitoring | Admin | Live order tracking |
-| 105 | Platform Settings | Admin | Config & preferences |
-| 106 | Reports & Analytics | Admin | Charts, exports |
-| 120 | Analytics Dashboard | Merchant | Revenue, orders, trends |
-| 121 | Business Registration | Business | Multi-step form |
-| 122 | Business Dashboard | Business | Overview, team, invoices |
-| 135 | Corporate Discounts | Corporate | Discount rules, checkout preview |
-| 136 | Employee Management | Corporate | Add/remove, search, filters |
-| 137 | Invoice History | Corporate | Monthly invoices, export |
-| 138 | Corporate Account Setup | Corporate | 3-step registration |
-| 139 | Corporate Accounts (Admin) | Admin | Manage all corps |
-| 142 | Membership & Subscription | Business | Silver/Gold plans |
-| 149 | Order Management | Merchant | Active orders, status |
-| 150 | Menu Management | Merchant | CRUD menu items |
-| 151 | Staff Management | Merchant | Team members |
-| 152 | Payouts & Earnings | Merchant | Revenue, withdrawals |
-| 153 | Sales Reports | Merchant | Revenue analytics |
-| 154 | Review Management | Merchant | Customer reviews |
-| 156 | Merchant Dashboard | Merchant | Overview & stats |
-| 157 | Restaurant Profile | Merchant | Edit profile |
-| 158 | Promotions & Offers | Merchant | Create promos |
-| 137 | Community Food Share | Donation | Donation hub |
-| 138a | Donate Your Food | Donation | Confirm donation |
-| 138b | Select Charity | Donation | Choose organization |
-| 138c | Schedule Pickup | Donation | Pickup scheduling |
-
----
-
-## 🔗 How Wireframes Connect to High-Fidelity
-
-```mermaid
-graph LR
-    subgraph "Wireframe Layer"
-        WF["Lo-Fi Wireframes<br/>Same element names<br/>Black & white"]
-    end
-    
-    subgraph "High-Fidelity Layer"  
-        HF["Hi-Fi Screens<br/>Same element names<br/>Full color + images"]
-    end
-    
-    subgraph "HTML Layer"
-        HTML["Static HTML Pages<br/>Browser-viewable<br/>Teal/Gold CSS"]
-    end
-
-    WF -->|"Identical -CLICK names<br/>Enables prototyping swap"| HF
-    HF -->|"Visual mirror<br/>Same layout & data"| HTML
-
-    style WF fill:#f0f0f0,color:#333,stroke:#333,stroke-width:2px
-    style HF fill:#3D9B9B,color:#fff,stroke:#F4B942,stroke-width:2px
-    style HTML fill:#2C5F5F,color:#fff,stroke:#F4B942,stroke-width:2px
-```
-
-**Key Design Decision:** All interactive elements across wireframe and high-fidelity modules share **identical names** (e.g., `LoginBtn-CLICK`, `SearchBar-CLICK`). This means prototyping links created in one layer transfer seamlessly to the other.
-
----
-
-## 📊 Project Statistics
+## 📊 Project Stats
 
 | Metric | Value |
 |--------|-------|
-| **Total Plugins** | 6 |
-| **Total JS Lines** | ~27,000+ |
-| **Total Screens (Hi-Fi)** | 76+ (mobile) + 30+ (desktop) |
-| **Total Screens (Wireframe)** | 46+ (mobile) + 64+ (desktop) |
-| **Total Screens (HTML)** | 29 |
-| **Grand Total Screens** | **~200+ unique screens** |
-| **Features Covered** | 92+ |
-| **User Roles** | Customer, Merchant, Corporate, Admin |
-| **Font** | Inter (3 weights) |
-| **Color Theme** | Teal (#3D9B9B) + Yellow (#F4B942) |
-| **Image Sources** | Unsplash (real images) |
+| **Generator Plugins** | 6 |
+| **Total JS Code** | ~27,000+ lines |
+| **Hi-Fi Screens Generated** | 76+ (mobile) + 30+ (desktop) |
+| **Wireframe Screens Generated** | 46+ (mobile) + 64+ (desktop) |
+| **HTML Preview Pages** | 29 |
+| **Total Unique Screens** | **200+** |
+| **Supported Viewports** | 375×812 (mobile) · 1440×900 (desktop) |
+| **Font** | Inter (3 weights, auto-loaded) |
+| **Image Source** | Unsplash (live URLs with fallback) |
 
 ---
 
-## 🛠️ Technical Deep-Dive
+## 🛠️ Extending for Your Own Use Case
 
-### Plugin Manifest Structure
+The generator architecture is **domain-agnostic**. To adapt it for a different product:
 
-```json
-{
-  "name": "BasKhao Complete App",
-  "id": "999999999",
-  "api": "1.0.0",
-  "main": "code.js",
-  "ui": "ui.html",
-  "editorType": ["figma"],
-  "networkAccess": {
-    "allowedDomains": [
-      "https://images.unsplash.com",
-      "https://randomuser.me",
-      "https://fonts.googleapis.com",
-      "https://fonts.gstatic.com"
-    ]
-  }
-}
-```
+1. **Modify the color scheme** — update the `C = { ... }` color object
+2. **Change screen content** — replace screen-building code blocks
+3. **Add new screens** — follow the pattern: create frame → add elements → push to array → advance position
+4. **Swap images** — change Unsplash URLs or use your own image sources
+5. **Update the UI panel** — edit `ui.html` to match your branding
 
-### Image Loading Strategy
-
-```javascript
-// Hi-Fi: Real images from Unsplash
-async function img(parent, x, y, w, h, url) {
-  try {
-    const image = await figma.createImageAsync(url);
-    rect.fills = [{ type: 'IMAGE', scaleMode: 'FILL', imageHash: image.hash }];
-  } catch {
-    // Fallback: gray placeholder with emoji
-    rect.fills = [{ type: 'SOLID', color: { r: 0.7, g: 0.7, b: 0.7 } }];
-  }
-}
-
-// Wireframe: Gray box with X-cross
-function imgWire(parent, x, y, w, h) {
-  // Gray rectangle + diagonal lines forming an X
-}
-```
-
-### Screen Positioning Algorithm
-
-```javascript
-// Mobile: Linear horizontal layout
-let x = 0;
-const W = 375, H = 812, G = 100;
-// Each screen: x += W + G
-
-// Desktop: Grid layout with rows
-let rowY = 0, colX = 0;
-const W = 1440, H = 900, G = 150, ROW_GAP = 200;
-// New row: colX = 0; rowY += H + ROW_GAP;
-```
+The helper functions (`btn`, `txt`, `card`, `img`, etc.) remain the same regardless of what you're building.
 
 ---
 
 ## 🤝 Contributing
 
 1. Fork this repository
-2. Create your feature branch (`git checkout -b feature/new-screen`)
-3. Add your screen code to the appropriate `code.js`
-4. Follow the naming convention: `ScreenName-CLICK` for interactive elements
-5. Commit your changes (`git commit -m 'Add new screen: Feature Name'`)
-6. Push to the branch (`git push origin feature/new-screen`)
-7. Open a Pull Request
+2. Create your feature branch (`git checkout -b feature/new-screens`)
+3. Follow the naming convention: `ElementName-CLICK` for interactive elements
+4. Commit your changes
+5. Push and open a Pull Request
 
 ---
 
@@ -594,6 +457,6 @@ This project is open source and available for educational and commercial use.
 ---
 
 <p align="center">
-  <b>BasKhao © 2025 — Food Delivery Platform</b><br/>
-  <sub>Built with ❤️ using the Figma Plugin API</sub>
+  <b>Figma Screen Generator</b><br/>
+  <sub>Generate complete UI prototypes from code — no manual design required.</sub>
 </p>
